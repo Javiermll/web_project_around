@@ -67,7 +67,7 @@
   border: none;
 }
 
-.popup__imput_name {
+.popup__input_name {
   margin: 0 auto 12px;
   border: none;
 
@@ -162,7 +162,7 @@
     top: calc(50% - 215px); /* Atura del popup */
     right: calc(50% - 150px); /* Ancho del popup */
   }
-  .X_image {
+  .popup__close-image {
     width: 26px;
     height: 26px;
   }

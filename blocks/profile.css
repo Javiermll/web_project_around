@@ -83,7 +83,7 @@
   object-fit: contain; /* Mantiene proporciones de la imagen */
 }
 
-.profile_add-button {
+.profile__add-button {
   display: flex;
   align-self: center;
   object-fit: cover;
@@ -100,7 +100,7 @@
   padding: 0;
 }
 
-.profile_add-button:hover {
+.profile__add-button:hover {
   opacity: 0.6;
 }
 
@@ -156,7 +156,7 @@
 
     margin: 14px 0 36px 0;
   }
-  .profile_add-button {
+  .profile__add-button {
     content: url(../images/Add_Button2.png);
     display: flex;
     align-self: center;
