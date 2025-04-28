@@ -87,6 +87,7 @@
   display: flex;
   align-self: center;
   object-fit: cover;
+  flex-shrink: 0;
 
   width: 150px;
   height: 50px;
@@ -95,7 +96,8 @@
   border: none;
   cursor: pointer;
 
-  margin: 13px 0 14px 135px;
+  margin: 13px 0 14px auto;
+  padding: 0;
 }
 
 .profile_add-button:hover {
@@ -104,8 +106,6 @@
 
 .profile__add-icon {
   box-sizing: border-box;
-  border: 2px solid #ffffff;
-  border-radius: 2px;
   border: none;
 
   height: 50px;
