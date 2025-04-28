@@ -1,0 +1,168 @@
+.popup {
+  position: fixed;
+  align-items: center;
+
+  width: 430px;
+  height: max-content;
+
+  border: none;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  padding: 0;
+
+  font-family: "Inter";
+}
+
+/*FORMA1: De opacar el fondo detras del popup*/
+/* Añade este estilo para el fondo oscuro nativo */
+.popup::backdrop {
+  background-color: rgba(0, 0, 0, 0.5); /* Negro semitransparente */
+}
+
+/*FORMA2: De opacar el fondo detras del popup*/
+/*.popup__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}*/
+
+.popup__container {
+  background-color: white;
+}
+
+.popup__title {
+  max-width: 330px;
+
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+
+  margin: 34px 64px 54px 36px;
+}
+
+/* Campos del formulario */
+.popup__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popup__field {
+  max-width: 360px;
+  margin: 0 37px 30px;
+  display: inline-grid;
+}
+
+.popup__input {
+  width: 100%;
+  font-weight: normal;
+
+  color: #c4c4c4;
+  border: none;
+}
+
+.popup__imput_name {
+  margin: 0 auto;
+  border: none;
+
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.popup__input_textarea {
+  margin: 0 auto;
+  border: none;
+  resize: none;
+
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.popup__line {
+  width: 360px;
+  color: #c4c4c4;
+  margin: 0 auto 0;
+}
+
+/* Botón Guardar */
+.popup__button {
+  width: 360px;
+  margin: 18px 37px 36px;
+
+  background-color: black;
+  color: white;
+  padding: 12px;
+
+  border: 1px solid #c4c4c4;
+  border-radius: 4px;
+  font-size: 18px;
+  line-height: 22px;
+  cursor: pointer;
+}
+
+.popup__button:hover {
+  opacity: 0.6;
+}
+
+/* Botón cerrar */
+.popup__close-button {
+  position: fixed;
+  top: calc(50% - 200px); /* Atura del popup */
+  right: calc(50% - 255px); /* Ancho del popup */
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+}
+
+.popup__close-button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (min-width: 320px) and (max-width: 544px) {
+  .popup {
+    max-width: 290px;
+    height: max-content;
+  }
+  .popup__title {
+    max-width: 240px;
+    font-size: 18px;
+    line-height: 22px;
+
+    margin: 25px 22px 76px;
+  }
+  .popup__field {
+    max-width: 240px;
+    margin: 0 22px 30px;
+  }
+  .popup__line {
+    max-width: 240px;
+    margin-top: 9px;
+  }
+  .popup__button {
+    max-width: 240px;
+    margin: 16px 22px 25px;
+  }
+  .popup__button:hover {
+    opacity: 0.6;
+  }
+  .popup__close-button {
+    top: calc(50% - 215px); /* Atura del popup */
+    right: calc(50% - 150px); /* Ancho del popup */
+  }
+  .X_image {
+    width: 26px;
+    height: 26px;
+  }
+}

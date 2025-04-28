@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Around the U.S" />
+    <meta name="keywords" content="html, css" />
+    <meta name="author" content="Javier Muñoz" />
+    <title>Around the U.S</title>
+
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" href="./vendor/fonts.css" />
+    <link rel="stylesheet" href="./pages/index.css" />
+
+    <!--Fuente "Inter"-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!--Fuente "Noto serif"-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <div class="header__container">
+          <img src="./images/Logo.png" alt="Logo Around-U.s" class="logo" />
+          <img
+            src="./images/Line.png"
+            alt="Linea inferior al logo"
+            class="line"
+          />
+        </div>
+      </header>
+      <main class="content">
+        <!--SECCION DE PERFIL PERSONAL-->
+        <section class="profile">
+          <!--parte1:Imagen Circular-->
+          <div class="profile__image-container">
+            <img
+              src="./images/JacquesC.jpg"
+              alt="Jacques Cousteau"
+              class="profile__avatar"
+            />
+          </div>
+
+          <!--Parte2: Informacion de perfil-->
+          <div class="profile__info">
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <p class="profile__occupation">Explorador</p>
+            <button class="profile__edit-button" id="Open-Poput">
+              <img
+                src="./images/Vector1.png"
+                alt="Editar perfil"
+                class="profile__edit-icon"
+              />
+            </button>
+          </div>
+
+          <!--parte3: Add - Button -->
+          <button class="profile_add-button">
+            <img
+              src="./images/Add_Button.png"
+              alt="Add Button"
+              class="profile__add-icon"
+            />
+          </button>
+        </section>
+
+        <!--Seccion 2: ELEMENTOS-->
+        <section class="elements">
+          <!---->
+          <article class="card">
+            <img
+              src="./images/paisaje1.jpg"
+              alt="Valle de Yosemite"
+              class="card__image"
+            />
+            <div class="card__wrap">
+              <h2 class="card__title">Valle de Yosemite</h2>
+              <div class="card__actions">
+                <!--<input type="checkbox" id="heart1" class="card__checkbox" />
+                <label for="heart1" class="card__link">
+                  <img
+                    src="./images/Vector2_corazon.svg"
+                    alt="Me gusta"
+                    class="card__link-logo card__link-logo--empty"
+                  />
+                  <img
+                    src="./images/Union.png"
+                    alt="Me gusta activado"
+                    class="card__link-logo card__link-logo--filled"
+                  />
+                </label>-->
+                <button class="card__link">
+                  <img
+                    src="./images/Vector2_corazon.svg"
+                    alt="Imagen de corazón"
+                    class="card__link-logo"
+                  />
+                </button>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <img
+              src="./images/paisaje2.png"
+              alt="Lago Louise"
+              class="card__image"
+            />
+            <div class="card__wrap">
+              <h2 class="card__title">Lago Louise</h2>
+              <div class="card__actions">
+                <button class="card__link">
+                  <img
+                    src="./images/Vector2_corazon.svg"
+                    alt="Imagen de corazón"
+                    class="card__link-logo"
+                  />
+                </button>
+              </div>
+            </div>
+            <!---->
+          </article>
+          <article class="card">
+            <img
+              src="./images/paisaje3.png"
+              alt="Montañas Calvas"
+              class="card__image"
+            />
+            <div class="card__wrap">
+              <h2 class="card__title">Montañas Calvas</h2>
+              <div class="card__actions">
+                <button class="card__link">
+                  <img
+                    src="./images/Vector2_corazon.svg"
+                    alt="Imagen de corazón"
+                    class="card__link-logo"
+                  />
+                </button>
+              </div>
+            </div>
+            <!---->
+          </article>
+          <article class="card">
+            <img
+              src="./images/paisaje4.png"
+              alt="Latemar"
+              class="card__image"
+            />
+            <div class="card__wrap">
+              <h2 class="card__title">Latemar</h2>
+              <div class="card__actions">
+                <button class="card__link">
+                  <img
+                    src="./images/Vector2_corazon.svg"
+                    alt="Imagen de corazón"
+                    class="card__link-logo"
+                  />
+                </button>
+              </div>
+            </div>
+            <!---->
+          </article>
+          <article class="card">
+            <img
+              src="./images/paisaje5.png"
+              alt="Parque Nacional de la Vanoise"
+              class="card__image"
+            />
+            <div class="card__wrap">
+              <h2 class="card__title">Parque Nacional de la Vanoise</h2>
+              <div class="card__actions">
+                <button class="card__link">
+                  <img
+                    src="./images/Vector2_corazon.svg"
+                    alt="Imagen de corazón"
+                    class="card__link-logo"
+                  />
+                </button>
+              </div>
+            </div>
+          </article>
+          <!---->
+          <article class="card">
+            <img
+              src="./images/paisaje6.png"
+              alt="Lago di Braies"
+              class="card__image"
+            />
+            <div class="card__wrap">
+              <h2 class="card__title">Lago di Braies</h2>
+              <div class="card__actions">
+                <button class="card__link">
+                  <img
+                    src="./images/Vector2_corazon.svg"
+                    alt="Imagen de corazón"
+                    class="card__link-logo"
+                  />
+                </button>
+              </div>
+            </div>
+          </article>
+        </section>
+        <!--SECCION 3-->
+      </main>
+      <footer class="footer">
+        <!--Derechos de autor-->
+        <p class="footer__copyright">© 2024 Around The U.S.</p>
+        <!---->
+      </footer>
+    </div>
+
+    <!--HTML de POPUP-->
+    <dialog class="popup" id="editProfilePopup">
+      <!--<div class="popup__overlay"></div>-->
+      <div class="popup__container">
+        <h2 class="popup__title">Editar perfil</h2>
+        <form class="popup__form">
+          <div class="popup__field">
+            <label for="popup-name"></label>
+            <input
+              type="text"
+              id="popup-name"
+              class="popup__input popup__imput_name"
+              placeholder="Nombre"
+              value="Jacques Cousteau"
+            />
+            <img
+              src="./images/Line 2.1.png"
+              alt="Linea de formulario"
+              class="popup__line"
+            />
+          </div>
+          <div class="popup__field">
+            <label for="popup-about"></label>
+            <input
+              type="text"
+              id="popup-about"
+              class="popup__input popup__input_textarea"
+              placeholder="Acerca de mi"
+              value="Explorador"
+            />
+            <img
+              src="./images/Line 2.1.png"
+              alt="Linea de formulario"
+              class="popup__line"
+            />
+          </div>
+          <button type="submit" class="popup__button">Guardar</button>
+        </form>
+        <button id="Close-Popup" class="popup__close-button">
+          <img
+            src="./images/Close_Icon.png"
+            alt="Cerrar formulario"
+            class="X_image"
+          />
+        </button>
+      </div>
+    </dialog>
+    <script src="./scripts/popup.js"></script>
+  </body>
+</html>

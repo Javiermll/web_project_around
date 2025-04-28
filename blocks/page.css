@@ -1,0 +1,41 @@
+body {
+  /*Aplicar color de fondo a toda la pagina*/
+  background: black;
+}
+
+.page {
+  /*Fuente global*/
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-style: normal;
+  font-weight: normal;
+
+  /*optimizacion de fuentes en distintos disposivos*/
+  /*Suavizado de fuentes*/
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+  /*Tamaño de la fuente*/
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+
+  /*Legibilidad del texto*/
+  text-rendering: optimizeLegibility;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: auto;
+  width: 100%;
+  height: 100vh;
+  max-width: 1280px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 544px) {
+  .page {
+    display: inline;
+  }
+}
