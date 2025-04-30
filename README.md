@@ -42,3 +42,5 @@ Entre las herramientas, este proyoecto incentivo a utilizzar tecnicas de desarro
 
 /_GitHub page:_/
 https://github.com/Javiermll/web_project_around
+https://github.com/Javiermll.io/web_project_around
+https://github.com/Javiermll.io/web_project_around/index.html
