@@ -43,6 +43,10 @@
 
   color: #ffffff;
   margin: 22px 0 0;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__occupation {
@@ -55,6 +59,10 @@
 
   color: #ffffff;
   margin: 16px 0 21px 0;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__edit-button {
