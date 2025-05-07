@@ -1,10 +1,13 @@
 .header {
   display: flex;
   flex-direction: column;
-  align-self: center;
+  align-self: flex-start;
   background-color: black;
+
   max-width: 880px;
-  margin: 45px 200px 0;
+  width: 100%;
+  margin: 45px 0 0;
+  border-bottom: 2px solid white;
 }
 
 .header__container {
@@ -17,13 +20,6 @@
   align-self: flex-start;
   max-width: 180px;
   margin: 0 0 41px;
-}
-
-.header__line {
-  align-self: center;
-  max-width: 880px;
-  width: 500%;
-  margin: 0 auto 0;
 }
 
 @media screen and (min-width: 320px) and (max-width: 544px) {
@@ -45,7 +41,16 @@
     width: 130px;
     margin: 0 0 32px 27px;
   }
-  .header__line {
-    width: 320px;
+}
+
+@media screen and (min-width: 545px) and (max-width: 1080px) {
+  .header {
+    width: 100%;
+  }
+  .header__container {
+    width: max-content;
+  }
+  .header__logo {
+    max-width: 150px;
   }
 }
