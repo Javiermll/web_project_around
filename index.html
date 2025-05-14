@@ -63,10 +63,8 @@
             </button>
           </div>
 
-          768 - 1080
-
           <!--parte3: Add - Button -->
-          <button class="profile__add-button">
+          <button class="profile__add-button" id="OpenPoput-add">
             <img
               src="./images/Add_Button.png"
               alt="Add Button"
@@ -74,10 +72,9 @@
             />
           </button>
         </section>
-
         <!--Seccion 2: ELEMENTOS-->
         <section class="elements">
-          <article class="card">
+          <!--<article class="card">
             <img
               src="./images/paisaje1.jpg"
               alt="Valle de Yosemite"
@@ -114,7 +111,6 @@
                 </button>
               </div>
             </div>
-            <!---->
           </article>
           <article class="card">
             <img
@@ -134,7 +130,6 @@
                 </button>
               </div>
             </div>
-            <!---->
           </article>
           <article class="card">
             <img
@@ -154,7 +149,6 @@
                 </button>
               </div>
             </div>
-            <!---->
           </article>
           <article class="card">
             <img
@@ -175,7 +169,6 @@
               </div>
             </div>
           </article>
-          <!---->
           <article class="card">
             <img
               src="./images/paisaje6.png"
@@ -194,7 +187,7 @@
                 </button>
               </div>
             </div>
-          </article>
+          </article>-->
         </section>
       </main>
       <footer class="footer">
@@ -204,7 +197,7 @@
       </footer>
     </div>
 
-    <!--HTML de POPUP-->
+    <!--HTML de POPUP - editProfilePopup-->
     <dialog class="popup" id="editProfilePopup">
       <!--<div class="popup__overlay"></div>-->
       <div class="popup__container">
@@ -247,6 +240,75 @@
             src="./images/Close_Icon.png"
             alt="Cerrar formulario"
             class="popup__close-image"
+          />
+        </button>
+      </div>
+    </dialog>
+
+    <!--HTML de POPUP - ADDcard-->
+    <dialog class="popup" id="addCardPopup">
+      <div class="popup__container">
+        <h2 class="popup__title-add">Nuevo Lugar</h2>
+        <form class="popup__form-add">
+          <div class="popup__field">
+            <label for="popup-place"></label>
+            <input
+              type="text"
+              id="popup-place"
+              class="popup__input popup__input_place"
+              placeholder="Título"
+            />
+            <img
+              src="./images/Line_2.1.png"
+              alt="Linea de formulario"
+              class="popup__line"
+            />
+          </div>
+          <div class="popup__field">
+            <label for="popup-image-url"></label>
+            <input
+              type="url"
+              id="popup-image-url"
+              class="popup__input popup__input_url"
+              placeholder="Enlace a la imagen"
+              pattern="https?://.+\..+"
+              title="Ingresa una URL completa de imagen (jpg, png o gif)"
+              required
+            />
+            <img
+              src="./images/Line_2.1.png"
+              alt="Linea de formulario"
+              class="popup__line"
+            />
+          </div>
+          <button type="submit" class="popup__button">Crear</button>
+        </form>
+        <button id="ClosePopup-Add" class="popup__close-buttonAdd">
+          <img
+            src="./images/Close_Icon.png"
+            alt="Cerrar formulario"
+            class="popup__close-image"
+          />
+        </button>
+      </div>
+    </dialog>
+
+    <!--Paso7: HTML del POPUP de imagen-->
+    <dialog class="popup popup_type_image" id="imagePopup">
+      <div class="popup__container popup__container_type_image">
+        <figure class="popup__figure">
+          <img src="" alt="" class="popup__image" />
+          <figcaption class="popup__caption"></figcaption>
+        </figure>
+        <!--Boton de cerrar popup-->
+        <button
+          type="button"
+          class="popup__close-button popup__close-button_type_image"
+        >
+          <img
+            src="./images/Close_Icon.png"
+            alt="Cerrar ventana emergente"
+            class="popup__close-icon"
           />
         </button>
       </div>

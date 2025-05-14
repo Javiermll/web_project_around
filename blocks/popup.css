@@ -46,6 +46,17 @@
   margin: 34px 64px 54px 36px;
 }
 
+.popup__title-add {
+  max-width: 330px;
+
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+
+  margin: 34px 64px 54px 36px;
+}
+
 /* Campos del formulario */
 .popup__form {
   display: flex;
@@ -76,7 +87,26 @@
   color: #000000;
 }
 
+.popup__input_place {
+  margin: 0 auto 12px;
+  border: none;
+
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
 .popup__input_textarea {
+  margin: 0 auto 12px;
+  border: none;
+  resize: none;
+
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.popup__input_url {
   margin: 0 auto 12px;
   border: none;
   resize: none;
@@ -131,6 +161,77 @@
   opacity: 0.6;
 }
 
+.popup__close-buttonAdd {
+  position: fixed;
+  top: calc(50% - 225px); /* Atura del popup */
+  right: calc(50% - 255px); /* Ancho del popup */
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+}
+
+.popup__close-buttonAdd:hover {
+  opacity: 0.6;
+}
+
+/* Contenedor principal del popup */
+.popup_type_image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.popup_type_image.popup_opened {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Contenedor de la imagen */
+.popup__container_type_image {
+  position: relative;
+  max-width: 75vw;
+  max-height: 75vh;
+
+  background-color: transparent;
+}
+
+/* Imagen dentro del popup */
+.popup__image {
+  max-width: 100%;
+  max-height: 80vh;
+  display: block;
+}
+
+/* Botón de cerrar */
+.popup__close-button_type_image {
+  position: absolute;
+  top: -40px;
+  right: 0px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Texto de descripción */
+.popup__caption {
+  color: white;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
 @media screen and (min-width: 320px) and (max-width: 544px) {
   .popup {
     max-width: 290px;
@@ -143,6 +244,15 @@
 
     margin: 25px 22px 76px;
   }
+
+  .popup__title-add {
+    max-width: 240px;
+    font-size: 18px;
+    line-height: 22px;
+
+    margin: 25px 22px 50px;
+  }
+
   .popup__field {
     max-width: 240px;
     margin: 0 22px 30px;
@@ -165,5 +275,28 @@
   .popup__close-image {
     width: 26px;
     height: 26px;
+  }
+  .popup__close-buttonAdd {
+    top: calc(50% - 250px); /* Atura del popup */
+    right: calc(50% - 150px); /* Ancho del popup */
+  }
+
+  .popup_type_image {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+  .popup__container_type_image {
+    position: fixed;
+    width: 75vw;
+    height: 80vh;
+    max-width: max-content;
+  }
+  .popup__close-button_type_image {
+    top: -35px;
+    right: 0px;
   }
 }
