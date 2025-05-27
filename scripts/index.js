@@ -247,7 +247,6 @@ function closeImagePopup() {
 }
 
 closeButton.addEventListener("click", closeImagePopup);
-
 imagePopup.addEventListener("click", (evt) => {
   if (evt.target === imagePopup) {
     closeImagePopup();
@@ -257,5 +256,24 @@ imagePopup.addEventListener("click", (evt) => {
 document.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape" && imagePopup.classList.contains("popup_opened")) {
     closeImagePopup();
+  }
+});
+
+//Proyecto 9
+//Cerrar la ventana emergente de popup editProfile y addCard
+// haciendo clic en la superposición
+
+// Seleccionar todos los popups
+document.addEventListener("click", (event) => {
+  const popup = event.target.closest(".popup"); // 1. Busca el popup más cercano al elemento clickeado
+  if (popup && event.target === popup) {
+    popup.close(); // 3. Cierra el popup encontrado
+
+    const form = popup.querySelector("form"); // 4. Bonus: Limpiar formularios si existen
+    if (form) {
+      form.reset(); // Limpia también los mensajes de error si los tienes
+      const errors = popup.querySelectorAll(".popup__error");
+      errors.forEach((error) => (error.textContent = ""));
+    }
   }
 });

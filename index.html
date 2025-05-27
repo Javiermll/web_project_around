@@ -73,122 +73,7 @@
           </button>
         </section>
         <!--Seccion 2: ELEMENTOS-->
-        <section class="elements">
-          <!--<article class="card">
-            <img
-              src="./images/paisaje1.jpg"
-              alt="Valle de Yosemite"
-              class="card__image"
-            />
-            <div class="card__wrap">
-              <h2 class="card__title">Valle de Yosemite</h2>
-              <div class="card__actions">
-                <button class="card__link">
-                  <img
-                    src="./images/Vector2_corazon.svg"
-                    alt="Imagen de corazón"
-                    class="card__link-logo"
-                  />
-                </button>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              src="./images/paisaje2.png"
-              alt="Lago Louise"
-              class="card__image"
-            />
-            <div class="card__wrap">
-              <h2 class="card__title">Lago Louise</h2>
-              <div class="card__actions">
-                <button class="card__link">
-                  <img
-                    src="./images/Vector2_corazon.svg"
-                    alt="Imagen de corazón"
-                    class="card__link-logo"
-                  />
-                </button>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              src="./images/paisaje3.png"
-              alt="Montañas Calvas"
-              class="card__image"
-            />
-            <div class="card__wrap">
-              <h2 class="card__title">Montañas Calvas</h2>
-              <div class="card__actions">
-                <button class="card__link">
-                  <img
-                    src="./images/Vector2_corazon.svg"
-                    alt="Imagen de corazón"
-                    class="card__link-logo"
-                  />
-                </button>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              src="./images/paisaje4.png"
-              alt="Latemar"
-              class="card__image"
-            />
-            <div class="card__wrap">
-              <h2 class="card__title">Latemar</h2>
-              <div class="card__actions">
-                <button class="card__link">
-                  <img
-                    src="./images/Vector2_corazon.svg"
-                    alt="Imagen de corazón"
-                    class="card__link-logo"
-                  />
-                </button>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              src="./images/paisaje5.png"
-              alt="Parque Nacional de la Vanoise"
-              class="card__image"
-            />
-            <div class="card__wrap">
-              <h2 class="card__title">Parque Nacional de la Vanoise</h2>
-              <div class="card__actions">
-                <button class="card__link">
-                  <img
-                    src="./images/Vector2_corazon.svg"
-                    alt="Imagen de corazón"
-                    class="card__link-logo"
-                  />
-                </button>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <img
-              src="./images/paisaje6.png"
-              alt="Lago di Braies"
-              class="card__image"
-            />
-            <div class="card__wrap">
-              <h2 class="card__title">Lago di Braies</h2>
-              <div class="card__actions">
-                <button class="card__link">
-                  <img
-                    src="./images/Vector2_corazon.svg"
-                    alt="Imagen de corazón"
-                    class="card__link-logo"
-                  />
-                </button>
-              </div>
-            </div>
-          </article>-->
-        </section>
+        <section class="elements"></section>
       </main>
       <footer class="footer">
         <!--Derechos de autor-->
@@ -202,39 +87,47 @@
       <!--<div class="popup__overlay"></div>-->
       <div class="popup__container">
         <h2 class="popup__title">Editar perfil</h2>
-        <form class="popup__form">
-          <div class="popup__field">
-            <label for="popup-name"></label>
-            <input
-              type="text"
-              id="popup-name"
-              class="popup__input popup__input_name"
-              placeholder="Nombre"
-              value="Jacques Cousteau"
-            />
-            <img
-              src="./images/Line_2.1.png"
-              alt="Linea de formulario"
-              class="popup__line"
-            />
-          </div>
-          <div class="popup__field">
-            <label for="popup-about"></label>
-            <input
-              type="text"
-              id="popup-about"
-              class="popup__input popup__input_textarea"
-              placeholder="Acerca de mi"
-              value="Explorador"
-            />
-            <img
-              src="./images/Line_2.1.png"
-              alt="Linea de formulario"
-              class="popup__line"
-            />
-          </div>
-          <button type="submit" class="popup__button">Guardar</button>
+
+        <!---->
+        <!---->
+        <!---->
+        <form class="popup__form" novalidate>
+          <fieldset class="popup__set">
+            <label for="popup-name" class="popup__field">
+              <input
+                type="text"
+                id="popup-name"
+                class="popup__input"
+                placeholder="Nombre"
+                required
+                minlength="2"
+                maxlength="40"
+              />
+              <span class="popup__error popup-name-error"></span>
+            </label>
+
+            <!---->
+            <!---->
+            <!---->
+            <label for="popup-about" class="popup__field">
+              <input
+                type="text"
+                id="popup-about"
+                class="popup__input"
+                placeholder="Acerca de"
+                required
+                minlength="2"
+                maxlength="200"
+              />
+              <span class="popup__error popup-about-error"></span>
+            </label>
+            <!---->
+            <!---->
+            <!---->
+            <button type="submit" class="popup__button button">Guardar</button>
+          </fieldset>
         </form>
+
         <button id="Close-Popup" class="popup__close-button">
           <img
             src="./images/Close_Icon.png"
@@ -249,40 +142,42 @@
     <dialog class="popup" id="addCardPopup">
       <div class="popup__container">
         <h2 class="popup__title-add">Nuevo Lugar</h2>
-        <form class="popup__form-add">
-          <div class="popup__field">
-            <label for="popup-place"></label>
-            <input
-              type="text"
-              id="popup-place"
-              class="popup__input popup__input_place"
-              placeholder="Título"
-            />
-            <img
-              src="./images/Line_2.1.png"
-              alt="Linea de formulario"
-              class="popup__line"
-            />
-          </div>
-          <div class="popup__field">
-            <label for="popup-image-url"></label>
-            <input
-              type="url"
-              id="popup-image-url"
-              class="popup__input popup__input_url"
-              placeholder="Enlace a la imagen"
-              pattern="https?://.+\..+"
-              title="Ingresa una URL completa de imagen (jpg, png o gif)"
-              required
-            />
-            <img
-              src="./images/Line_2.1.png"
-              alt="Linea de formulario"
-              class="popup__line"
-            />
-          </div>
-          <button type="submit" class="popup__button">Crear</button>
+
+        <!---->
+        <!---->
+        <!---->
+        <form class="popup__form popup__form-add" novalidate>
+          <fieldset class="popup__set">
+            <label for="popup-place" class="popup__field">
+              <input
+                type="text"
+                id="popup-place"
+                class="popup__input"
+                placeholder="Título"
+                required
+                minlength="2"
+                maxlength="30"
+              />
+              <span class="popup__error popup-place-error"></span>
+            </label>
+
+            <label for="popup-image-url" class="popup__field">
+              <input
+                type="url"
+                id="popup-image-url"
+                class="popup__input"
+                placeholder="Enlace a la imagen"
+                pattern="https?://.+\..+"
+                title="Ingresa una URL completa de imagen (jpg, png o gif)"
+                required
+                minlength="2"
+              />
+              <span class="popup__error popup-image-url-error"></span>
+            </label>
+            <button type="submit" class="popup__button button">Crear</button>
+          </fieldset>
         </form>
+
         <button id="ClosePopup-Add" class="popup__close-buttonAdd">
           <img
             src="./images/Close_Icon.png"
@@ -314,5 +209,6 @@
       </div>
     </dialog>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
