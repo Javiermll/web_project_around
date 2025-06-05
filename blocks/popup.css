@@ -177,64 +177,52 @@
   opacity: 0.6;
 }
 
-/* Contenedor principal del popup */
-.popup_type_image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+/* Imagen dentro del popup */
+.popup_type_image.popup_opened {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.popup_type_image.popup_opened {
-  opacity: 1;
-  visibility: visible;
+.popup_type_image {
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 /* Contenedor de la imagen */
 .popup__container_type_image {
   position: relative;
+  display: inline-block;
   max-width: 75vw;
   max-height: 75vh;
-
-  background-color: transparent;
+  margin: auto;
+  background: transparent;
 }
 
-/* Imagen dentro del popup */
+.popup_type_image .popup__container {
+  background: transparent;
+  padding: 0;
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
 .popup__image {
+  max-height: 70vh;
   max-width: 100%;
-  max-height: 80vh;
+  object-fit: contain;
   display: block;
 }
 
-/* Botón de cerrar */
-.popup__close-button_type_image {
-  position: absolute;
-  top: -40px;
-  right: 0px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* Texto de descripción */
 .popup__caption {
   color: white;
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-top: 10px;
+  text-align: center;
+  max-width: 100%;
+  padding: 0 20px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 544px) {
   .popup {
-    max-width: 290px;
-    height: max-content;
+    max-width: 100%;
   }
   .popup__title {
     max-width: 240px;
@@ -283,20 +271,20 @@
 
   .popup_type_image {
     width: 100%;
-    height: 100%;
+    height: max-content;
     background: rgba(0, 0, 0, 0.9);
-    opacity: 0;
-    visibility: hidden;
     transition: opacity 0.3s, visibility 0.3s;
   }
   .popup__container_type_image {
-    position: fixed;
-    width: 75vw;
-    height: 80vh;
-    max-width: max-content;
-  }
-  .popup__close-button_type_image {
-    top: -35px;
-    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative; /* Mejor que fixed en este caso */
+    width: 100%;
+    max-width: 100%;
+    max-height: 80vh;
+    background: transparent;
   }
 }

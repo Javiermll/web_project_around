@@ -72,8 +72,37 @@
             />
           </button>
         </section>
+
+        <!---->
+        <!---->
+        <!---->
         <!--Seccion 2: ELEMENTOS-->
-        <section class="elements"></section>
+        <section class="elements">
+          <template id="card-template">
+            <article class="card">
+              <img class="card__image" src="#" alt="#" />
+              <button class="card__delete-button">
+                <img
+                  src="./images/Trash.svg"
+                  alt="Eliminar tarjeta"
+                  class="card__delete-icon"
+                />
+              </button>
+              <div class="card__wrap">
+                <h2 class="card__title"></h2>
+                <div class="card__actions">
+                  <button class="card__link">
+                    <img
+                      src="./images/Vector2_corazon.svg"
+                      alt="Me gusta"
+                      class="card__link-logo"
+                    />
+                  </button>
+                </div>
+              </div>
+            </article>
+          </template>
+        </section>
       </main>
       <footer class="footer">
         <!--Derechos de autor-->
@@ -195,20 +224,9 @@
           <img src="" alt="" class="popup__image" />
           <figcaption class="popup__caption"></figcaption>
         </figure>
-        <!--Boton de cerrar popup-->
-        <button
-          type="button"
-          class="popup__close-button popup__close-button_type_image"
-        >
-          <img
-            src="./images/Close_Icon.png"
-            alt="Cerrar ventana emergente"
-            class="popup__close-icon"
-          />
-        </button>
+        <button type="button" class="popup__close-button_type_image"></button>
       </div>
     </dialog>
-    <script src="./scripts/index.js"></script>
-    <script src="./scripts/validation.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
   </body>
 </html>
