@@ -22,24 +22,18 @@ export default class Card {
   }
 
   _setEventListeners() {
-    // Like button
     this._likeButton.addEventListener("click", () => this._handleLikeIcon());
-
-    // Delete button
     this._deleteButton.addEventListener("click", () =>
       this._handleDeleteCard()
     );
 
-    // Image click - versión segura
     this._cardImage.addEventListener("click", (e) => {
-      e.stopPropagation(); // Previene eventos no deseados
-      this._handleImageClick(this._link, this._name);
-      /*this._handleImageClick({ name: this._name, link: this._link });*/
+      e.stopPropagation();
+      this._handleImageClick({ name: this._name, link: this._link });
     });
   }
 
   _handleLikeIcon() {
-    // Alternar entre los dos estados del like
     if (this._likeIcon.src.includes("_black.")) {
       this._likeIcon.src = "./images/Vector2_corazon.svg";
     } else {
@@ -48,7 +42,6 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    // Animación de fade out antes de eliminar
     this._element.classList.add("card--fade-out");
     setTimeout(() => {
       this._element.remove();
@@ -58,8 +51,6 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-
-    // Obtener referencias a los elementos internos
     this._cardImage = this._element.querySelector(".card__image");
     this._cardTitle = this._element.querySelector(".card__title");
     this._likeButton = this._element.querySelector(".card__link");
@@ -67,7 +58,6 @@ export default class Card {
     this._likeIcon = this._element.querySelector(".card__link-logo");
     this._cardActions = this._element.querySelector(".card__actions");
 
-    // Configurar contenido
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardTitle.textContent = this._name;

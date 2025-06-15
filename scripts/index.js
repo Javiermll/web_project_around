@@ -1,18 +1,16 @@
 // --------------------------
-// IMPORTACIONES
+// IMPORTACIONES DE CLASES Y UTILIDADES
 // --------------------------
 
+import Section from "./Section.js";
 import Card from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
-import {
-  openImagePopup,
-  closeImagePopup,
-  setupImagePopupListeners,
-  isValidImageUrl,
-} from "./utils.js";
-
+import { isValidImageUrl } from "./utils.js";
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 // --------------------------
-// DATOS INICIALES DE TARJETAS
+// DATOS INICIALES PARA LAS TARJETAS
 // --------------------------
 
 const initialCards = [
@@ -43,50 +41,65 @@ const initialCards = [
 ];
 
 // --------------------------
-// ELEMENTOS DEL DOM (Tarjetas)
-// --------------------------
-const cardsContainer = document.querySelector(".elements");
-const cardTemplate = document.querySelector("#card-template");
-
-// --------------------------
-// ELEMENTOS DEL DOM (Popups)
+// ELEMENTOS DEL DOM - POPUP EDITAR PERFIL
 // --------------------------
 
-// Popup editar perfil
-const popupEdit = document.querySelector("#editProfilePopup");
 const btnOpenEdit = document.querySelector("#Open-Poput");
-const btnCloseEdit = document.querySelector("#Close-Popup");
-const formEditProfile = popupEdit.querySelector(".popup__form");
-const inputName = document.getElementById("popup-name");
-const inputAbout = document.getElementById("popup-about");
-const profileName = document.querySelector(".profile__name");
-const profileOccupation = document.querySelector(".profile__occupation");
-
-// Popup agregar tarjeta
-const popupAddCard = document.querySelector("#addCardPopup");
 const btnOpenAdd = document.querySelector("#OpenPoput-add");
-const btnCloseAdd = document.querySelector("#ClosePopup-Add");
-const formAddCard = popupAddCard.querySelector(".popup__form-add");
-const inputPlace = document.getElementById("popup-place");
+
+const formEditProfile = document.querySelector(
+  "#editProfilePopup .popup__form"
+);
+const formAddCard = document.querySelector("#addCardPopup .popup__form-add");
+
 const inputUrl = document.getElementById("popup-image-url");
+const inputName = formEditProfile.querySelector("#popup-name");
+const inputAbout = formEditProfile.querySelector("#popup-about");
 
 // --------------------------
-// LISTENERS INICIALES (utils.js)
+// INSTANCIA DE USERINFO
 // --------------------------
-setupImagePopupListeners();
 
-// --------------------------
-// RENDERIZAR TARJETAS INICIALES
-// Incertar las tarjetas iniciales al cargar la pagina
-// --------------------------
-initialCards.forEach((cardData) => {
-  const card = new Card(cardData, "#card-template", openImagePopup);
-  cardsContainer.append(card.generateCard());
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  aboutSelector: ".profile__occupation",
 });
 
 // --------------------------
-// INSTANCIAS DE VALIDACIÓN
+// INSTANCIA DEL POPUP DE IMAGEN
+// Muestra una imagen en grande al hacer clic en una tarjeta
 // --------------------------
+
+const imagePopup = new PopupWithImage("#imagePopup");
+imagePopup.setEventListeners();
+
+const handleCardClick = ({ name, link }) => {
+  imagePopup.open({ name, link });
+};
+
+// --------------------------
+// INSTANCIA DE SECTION - CONTENEDOR DE TARJETAS
+// Renderiza las tarjetas iniciales y permite agregar nuevas
+// --------------------------
+
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (cardData) => {
+      const card = new Card(cardData, "#card-template", handleCardClick);
+      const cardElement = card.generateCard();
+      cardSection.addItem(cardElement);
+    },
+  },
+  ".elements"
+);
+
+cardSection.renderItems();
+
+// --------------------------
+// INSTANCIAS DE VALIDACIÓN DE FORMULARIOS
+// --------------------------
+
 const config = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
@@ -96,6 +109,10 @@ const config = {
   errorClass: "popup__error_visible",
 };
 
+// --------------------------
+// VALIDADORES DE FORMULARIOS
+// --------------------------
+
 const formEditValidator = new FormValidator(config, formEditProfile);
 formEditValidator.enableValidation();
 
@@ -103,44 +120,29 @@ const formAddValidator = new FormValidator(config, formAddCard);
 formAddValidator.enableValidation();
 
 // --------------------------
-// FUNCIONES - POPUP EDITAR PERFIL
-// Apertura, cierre y logica del formulario del perfil
+// POPUP: EDITAR PERFIL
 // --------------------------
+
+const editProfilePopup = new PopupWithForm("#editProfilePopup", (formData) => {
+  userInfo.setUserInfo({
+    name: formData["popup-name"],
+    about: formData["popup-about"],
+  });
+});
+
+editProfilePopup.setEventListeners();
+
 btnOpenEdit.addEventListener("click", () => {
-  formEditProfile.reset(); // limpia los campos del formulario
-  formEditValidator.resetValidation(); // limpia errores y botón
-  popupEdit.showModal();
-});
-
-btnCloseEdit.addEventListener("click", () => {
-  popupEdit.close();
-});
-
-formEditProfile.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  profileName.textContent = inputName.value;
-  profileOccupation.textContent = inputAbout.value;
-  popupEdit.close();
+  formEditValidator.resetValidation();
+  editProfilePopup.open();
 });
 
 // --------------------------
-// FUNCIONES - POPUP AGREGAR TARJETA
-// Apertura, cierre y logica del formulario de nueva tarjeta.
+// POPUP: AGREGAR TARJETA
 // --------------------------
-btnOpenAdd.addEventListener("click", () => {
-  formAddCard.reset(); // limpia los campos del formulario
-  formAddValidator.resetValidation(); // limpia errores y botón
-  popupAddCard.showModal();
-});
 
-btnCloseAdd.addEventListener("click", () => {
-  popupAddCard.close();
-});
-
-formAddCard.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-
-  if (!isValidImageUrl(inputUrl.value)) {
+const addCardPopup = new PopupWithForm("#addCardPopup", (formData) => {
+  if (!isValidImageUrl(formData["popup-image-url"])) {
     const errorElement = document.createElement("p");
     errorElement.classList.add("error-message");
     errorElement.textContent = "URL de imagen no válida";
@@ -150,12 +152,18 @@ formAddCard.addEventListener("submit", (evt) => {
   }
 
   const newCard = new Card(
-    { name: inputPlace.value, link: inputUrl.value },
+    { name: formData["popup-place"], link: formData["popup-image-url"] },
     "#card-template",
-    openImagePopup
+    handleCardClick
   );
 
-  cardsContainer.prepend(newCard.generateCard());
-  formAddCard.reset();
-  popupAddCard.close();
+  const cardElement = newCard.generateCard();
+  cardSection.addItem(cardElement);
+});
+
+addCardPopup.setEventListeners();
+
+btnOpenAdd.addEventListener("click", () => {
+  formAddValidator.resetValidation();
+  addCardPopup.open();
 });

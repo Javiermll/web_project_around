@@ -223,6 +223,7 @@
 @media screen and (min-width: 320px) and (max-width: 544px) {
   .popup {
     max-width: 100%;
+    width: fit-content;
   }
   .popup__title {
     max-width: 240px;
