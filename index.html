@@ -39,18 +39,21 @@
         </div>
       </header>
       <main class="content">
-        <!--SECCION DE PERFIL PERSONAL-->
         <section class="profile">
-          <!--parte1:Imagen Circular-->
           <div class="profile__image-container">
             <img
               src="./images/JacquesC.jpg"
               alt="Jacques Cousteau"
               class="profile__avatar"
             />
+            <div class="profile__avatar-overlay">
+              <img
+                src="./images/Perfil.svg"
+                alt="Editar avatar"
+                class="profile__avatar-edit-icon"
+              />
+            </div>
           </div>
-
-          <!--Parte2: Informacion de perfil-->
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <p class="profile__occupation">Explorador</p>
@@ -231,6 +234,56 @@
         <button type="button" class="popup__close-button_type_image"></button>
       </div>
     </dialog>
+
+    <!--Popup delete Card Popup-->
+    <dialog class="popup" id="deleteCardPopup">
+      <div class="popup__container">
+        <h2 class="popup__title popup__title-deleteCard">¿Estás seguro/a?</h2>
+        <form class="popup__form popup__form-delete" novalidate>
+          <button type="submit" class="popup__button popup__button_confirm">
+            Sí
+          </button>
+        </form>
+        <button class="popup__close-button popup__close-buttonDelete">
+          <img
+            src="./images/Close_Icon.png"
+            alt="Cerrar"
+            class="popup__close-image"
+          />
+        </button>
+      </div>
+    </dialog>
+
+    <!--HTML del popup para actualizar el avatar-->
+    <dialog class="popup" id="avatarPopup">
+      <div class="popup__container">
+        <h2 class="popup__title">Cambiar foto de perfil</h2>
+        <form class="popup__form popup__form-avatar" novalidate>
+          <fieldset class="popup__set">
+            <label class="popup__field">
+              <input
+                type="url"
+                name="avatar"
+                id="avatar-url"
+                class="popup__input"
+                placeholder="Enlace de la imagen"
+                required
+              />
+              <span class="popup__error avatar-url-error"></span>
+            </label>
+            <button type="submit" class="popup__button button">Guardar</button>
+          </fieldset>
+        </form>
+        <button class="popup__close-button">
+          <img
+            src="./images/Close_Icon.png"
+            alt="Cerrar formulario"
+            class="popup__close-image"
+          />
+        </button>
+      </div>
+    </dialog>
+
     <script type="module" src="./scripts/index.js"></script>
   </body>
 </html>

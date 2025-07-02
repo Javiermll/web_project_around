@@ -91,17 +91,19 @@
   cursor: pointer;
 }
 
-.card__link:active {
-  content: url(../images/Union.png);
-}
-
 .card__link-logo {
-  max-width: 21px;
-  height: 100%;
+  width: 24px;
+  height: 24px;
+  filter: grayscale(100%); /* Corazón inactivo */
 }
 
 .card__link-logo:hover {
   opacity: 0.5;
+}
+
+.card__link-logo--active {
+  transition: filter 0.3s ease-in-out;
+  content: url(../images/Union.png);
 }
 
 @media screen and (min-width: 320px) and (max-width: 544px) {

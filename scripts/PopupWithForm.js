@@ -7,9 +7,9 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._formElement = this._popup.querySelector("form");
     this._inputList = Array.from(this._formElement.querySelectorAll("input"));
+    this._submitButton = this._formElement.querySelector(".popup__button"); // ✅ AÑADIDO
   }
 
-  // Recoge los datos del formulario
   _getInputValues() {
     const formValues = {};
     this._inputList.forEach((input) => {
@@ -25,12 +25,22 @@ export default class PopupWithForm extends Popup {
       evt.preventDefault();
       const inputValues = this._getInputValues();
       this._handleFormSubmit(inputValues);
-      this.close();
     });
+  }
+
+  setLoadingText(isLoading, loadingMessage = "Guardando...") {
+    if (!this._submitButton) return;
+
+    if (isLoading) {
+      this._originalButtonText = this._submitButton.textContent;
+      this._submitButton.textContent = loadingMessage;
+    } else {
+      this._submitButton.textContent = this._originalButtonText;
+    }
   }
 
   close() {
     super.close();
-    this._formElement.reset(); // Reiniciar formulario al cerrar
+    this._formElement.reset();
   }
 }

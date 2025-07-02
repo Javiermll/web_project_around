@@ -8,37 +8,17 @@ import { FormValidator } from "./FormValidator.js";
 import { isValidImageUrl } from "./utils.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
+import PopupWithConfirmation from "./PopupWithConfirmation.js";
 import UserInfo from "./UserInfo.js";
-// --------------------------
-// DATOS INICIALES PARA LAS TARJETAS
-// --------------------------
+import Api from "./Api.js";
 
-const initialCards = [
-  {
-    name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+const api = new Api({
+  baseUrl: "https://around-api.es.tripleten-services.com/v1",
+  headers: {
+    authorization: "60c65a7f-3cd5-4016-91c0-d95efac7e3e1",
+    "Content-Type": "application/json",
   },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-  },
-  {
-    name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-  },
-  {
-    name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
-];
+});
 
 // --------------------------
 // ELEMENTOS DEL DOM - POPUP EDITAR PERFIL
@@ -63,7 +43,24 @@ const inputAbout = formEditProfile.querySelector("#popup-about");
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
   aboutSelector: ".profile__occupation",
+  avatarSelector: ".profile__avatar",
 });
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      about: userData.about,
+    });
+
+    document.querySelector(".profile__avatar").src = userData.avatar;
+
+    window.currentUserId = userData._id;
+    cardSection.renderItems(cards);
+  })
+  .catch((err) => {
+    console.error("Error al cargar datos iniciales:", err);
+  });
 
 // --------------------------
 // INSTANCIA DEL POPUP DE IMAGEN
@@ -78,23 +75,63 @@ const handleCardClick = ({ name, link }) => {
 };
 
 // --------------------------
+// INSTANCIAS - PopupWithConfirmation
+// --------------------------
+
+const deleteCardPopup = new PopupWithConfirmation("#deleteCardPopup");
+deleteCardPopup.setEventListeners();
+
+// --------------------------
 // INSTANCIA DE SECTION - CONTENEDOR DE TARJETAS
 // Renderiza las tarjetas iniciales y permite agregar nuevas
 // --------------------------
 
+const handleDeleteCard = (cardId, cardElement) => {
+  deleteCardPopup.setSubmitAction(() => {
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        cardElement.remove();
+        deleteCardPopup.close();
+      })
+      .catch((err) => {
+        console.error("Error al eliminar tarjeta:", err);
+      });
+  });
+
+  deleteCardPopup.open();
+};
+
+const handleLikeClick = (cardId, isLiked, cardInstance) => {
+  const likeRequest = isLiked ? api.unlikeCard(cardId) : api.likeCard(cardId);
+  likeRequest
+    .then((updatedCard) => {
+      cardInstance._isLiked = !isLiked; // Actualiza el estado local
+      cardInstance._toggleLikeIcon(); // Cambia el ícono del corazón
+    })
+    .catch((err) => {
+      console.error("Error al cambiar estado de like:", err);
+    });
+};
+
 const cardSection = new Section(
   {
-    items: initialCards,
+    items: [], // ya no usamos initialCards
     renderer: (cardData) => {
-      const card = new Card(cardData, "#card-template", handleCardClick);
+      const card = new Card(
+        cardData,
+        "#card-template",
+        handleCardClick,
+        handleDeleteCard,
+        handleLikeClick,
+        window.currentUserId
+      );
       const cardElement = card.generateCard();
-      cardSection.addItem(cardElement);
+      cardSection.addItem(cardElement); //
     },
   },
   ".elements"
 );
-
-cardSection.renderItems();
 
 // --------------------------
 // INSTANCIAS DE VALIDACIÓN DE FORMULARIOS
@@ -124,10 +161,26 @@ formAddValidator.enableValidation();
 // --------------------------
 
 const editProfilePopup = new PopupWithForm("#editProfilePopup", (formData) => {
-  userInfo.setUserInfo({
-    name: formData["popup-name"],
-    about: formData["popup-about"],
-  });
+  editProfilePopup.setLoadingText(true);
+
+  api
+    .updateUserInfo({
+      name: formData["popup-name"],
+      about: formData["popup-about"],
+    })
+    .then((updatedData) => {
+      userInfo.setUserInfo({
+        name: updatedData.name,
+        about: updatedData.about,
+      });
+      editProfilePopup.close();
+    })
+    .catch((err) => {
+      console.error("Error al actualizar el perfil:", err);
+    })
+    .finally(() => {
+      editProfilePopup.setLoadingText(false);
+    });
 });
 
 editProfilePopup.setEventListeners();
@@ -151,14 +204,32 @@ const addCardPopup = new PopupWithForm("#addCardPopup", (formData) => {
     return;
   }
 
-  const newCard = new Card(
-    { name: formData["popup-place"], link: formData["popup-image-url"] },
-    "#card-template",
-    handleCardClick
-  );
+  addCardPopup.setLoadingText(true);
 
-  const cardElement = newCard.generateCard();
-  cardSection.addItem(cardElement);
+  api
+    .addCard({
+      name: formData["popup-place"],
+      link: formData["popup-image-url"],
+    })
+    .then((cardData) => {
+      const newCard = new Card(
+        cardData,
+        "#card-template",
+        handleCardClick,
+        handleDeleteCard,
+        handleLikeClick,
+        window.currentUserId
+      );
+      const cardElement = newCard.generateCard();
+      cardSection.addItem(cardElement);
+      addCardPopup.close();
+    })
+    .catch((err) => {
+      console.error("Error al agregar tarjeta:", err);
+    })
+    .finally(() => {
+      addCardPopup.setLoadingText(false);
+    });
 });
 
 addCardPopup.setEventListeners();
@@ -167,3 +238,60 @@ btnOpenAdd.addEventListener("click", () => {
   formAddValidator.resetValidation();
   addCardPopup.open();
 });
+
+// --------------------------
+// INSTANCIA DE SECTION - CONTENEDOR DE TARJETAS
+// Renderiza las tarjetas iniciales y permite agregar nuevas
+// --------------------------
+
+const formAvatar = document.querySelector("#avatarPopup .popup__form-avatar");
+const avatarInput = formAvatar.querySelector("#avatar-url");
+
+const formAvatarValidator = new FormValidator(config, formAvatar);
+formAvatarValidator.enableValidation();
+
+const avatarPopup = new PopupWithForm("#avatarPopup", (formData) => {
+  avatarPopup.setLoadingText(true);
+
+  api
+    .updateAvatar({ avatar: formData.avatar })
+    .then((updatedUser) => {
+      const avatarImg = document.querySelector(".profile__avatar");
+
+      // Define el listener antes de cambiar el src
+      const handleImageLoad = () => {
+        avatarImg.removeEventListener("load", handleImageLoad);
+        avatarPopup.close();
+      };
+
+      avatarImg.addEventListener("load", handleImageLoad);
+
+      // Actualiza el DOM (esto cambiará el src de la imagen)
+      userInfo.setUserInfo({
+        avatar: updatedUser.avatar,
+        name: updatedUser.name,
+        about: updatedUser.about,
+      });
+
+      // En caso de que la imagen ya esté cargada (desde caché)
+      if (avatarImg.complete) {
+        avatarImg.removeEventListener("load", handleImageLoad);
+        avatarPopup.close();
+      }
+    })
+    .catch((err) => {
+      console.error("Error al actualizar avatar:", err);
+    })
+    .finally(() => {
+      avatarPopup.setLoadingText(false);
+    });
+});
+
+avatarPopup.setEventListeners();
+
+document
+  .querySelector(".profile__avatar-overlay")
+  .addEventListener("click", () => {
+    formAvatarValidator.resetValidation();
+    avatarPopup.open();
+  });
