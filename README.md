@@ -1,46 +1,42 @@
-# Tripleten web_project_homeland
+# Around The U.S. — Red Social de Fotos
 
-/_Nombre del proyecto_/
-Tripleten Art Gallery
+> 📌 Este repositorio documenta una etapa temprana del proyecto "Around The U.S." durante el bootcamp TripleTen. La versión final, con backend propio y desplegada en producción, vive en [web_project_api_full](https://github.com/Javiermll/web_project_api_full).
 
-/_Descripcion del proyecto y funcionalidad_/:
-El presente proyecto tiene por finalidad la realizacion de una paguina web responsiva encargada de mostrarnos las fotos y visitias a distintos lugares del planeta por parte del equipo de desarrollo de Tripleten Bootcamp Academy.
+Aplicación web interactiva de una red social de fotografías donde los usuarios pueden ver, publicar, dar like y eliminar tarjetas de lugares, además de editar su perfil y avatar. Desarrollada como proyecto de formación en el bootcamp TripleTen.
 
-/_Tecnologias y tecnicas utilizadas_/:
-Entre las herramientas, este proyoecto incentivo a utilizzar tecnicas de desarrollo web como:
+## Descripcion / Objetivo
 
-        /_Aplicaciones anteriores_/
+SPA (Single Page Application) que conecta con una API REST real para gestionar tarjetas de lugares fotográficos y el perfil del usuario, aplicando Programación Orientada a Objetos (POO) con JavaScript vanilla.
 
-        - Etiquetas meta
-        - Etiquetas semanticas (Las cuales ahora van de forma ordenada en
-          el directorio fonts e importadas en index.css)
-        - Flexbox para el posicionamiento de elementos
-        - BEM para la identificacion y clasificacion de elementos,
-          bloques y modificadores
-        - Uso de rutas de archivos para la inclusion de imagenes, iconos,
-          logos, etc.
-        - Uso de GIT BASH para la subida de informacion a la nube.
+## Tecnologias y herramientas
 
+- HTML5
+- CSS3 con Flexbox y BEM
+- JavaScript ES6+ (clases, módulos ES, Promises, `fetch`)
+- Programación Orientada a Objetos (POO) — clases reutilizables
+- Fetch API para consumo de API REST
+- API REST de TripleTen (`around-api.es.tripleten-services.com`)
+- Git / GitHub para control de versiones
 
-          /_Nuevas aplicaciones_/
+## Funcionalidades principales
 
-        - Conocimento y uso de Figma como nuevo "Brief" del proyecto.
-        - @font-face y toda su aplicacion para la descarga, importacion y
-          uso de distintas fuentes.
+- **Consumo de API REST:** carga inicial de perfil y tarjetas con `Promise.all`, sincronización en tiempo real con 6 endpoints (GET, POST, PATCH, PUT, DELETE).
+- **Gestion de tarjetas:** crear nuevas tarjetas con nombre e imagen, eliminar las propias con modal de confirmación, dar/quitar like con actualización de contador en la interfaz.
+- **Edicion de perfil y avatar:** modales para actualizar nombre, descripción y foto de perfil vía PATCH a la API.
+- **Validacion de formularios:** clase `FormValidator` que valida en tiempo real todos los formularios, habilitando/deshabilitando el botón de envío.
+- **Arquitectura OOP:** 9 clases con responsabilidad única: `Api`, `Card`, `Section`, `UserInfo`, `Popup`, `PopupWithForm`, `PopupWithImage`, `PopupWithConfirmation`, `FormValidator`.
 
-        - Optimizacion de fuentes en distintos disposivos mediante la aplicacion de:
-          -Suavizado de fuentes
-          -Tamaño de fuentes
-          -Legibilidad de los textos
+## Rol
 
-        - Desarrollo responsivo de paginas web la cual requirio del
-          uso de:
+Proyecto individual: arquitectura completa de clases JS, integración con API REST, manejo de eventos y estilos CSS.
 
-          - Apliacin de max-width: xx% en imagenes, textos y contenedores de
-            contenido (Para cada uno de los quiebres de tamaño de pagina)
-          - Media queries para el ajuste de la proporcionalidad de la pagina.
+## Resultado / Impacto
 
-/_GitHub page:_/
-https://github.com/Javiermll/web_project_around
-https://github.com/Javiermll.io/web_project_around
-https://github.com/Javiermll.io/web_project_around/index.html
+- 9 clases JavaScript implementadas con principio de responsabilidad única (SRP).
+- 7 operaciones de API integradas: cargar perfil, cargar tarjetas, editar perfil, editar avatar, crear tarjeta, eliminar tarjeta, dar/quitar like.
+- Validación en tiempo real en todos los formularios modales de la aplicación.
+- Aplicación totalmente funcional sin frameworks de UI, usando sólo JavaScript vanilla y POO.
+
+## Repositorio
+
+- GitHub: https://github.com/Javiermll/web_project_around
